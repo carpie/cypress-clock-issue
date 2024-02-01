@@ -3,9 +3,20 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
+import { useEffect, useState } from 'react';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [message, setMessage] = useState('Waiting for timeout...');
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('==> Timeout expired');
+      setMessage('Timeout complete!');
+    }, 2000);
+  }, []);
+
   return (
     <>
       <Head>
@@ -15,6 +26,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <p>{message}</p>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
